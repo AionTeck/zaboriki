@@ -16,6 +16,6 @@ class FenceType extends Model
 
     public function fences(): HasMany
     {
-        return $this->hasMany(Fence::class);
+        return $this->hasMany(Fence::class, 'type_id', 'id');
     }
 }

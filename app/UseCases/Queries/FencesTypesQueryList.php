@@ -3,10 +3,12 @@
 namespace App\UseCases\Queries;
 
 use App\Models\FenceType;
+use Thumbrise\Toolkit\Opresult\OperationResult;
+use function PHPUnit\Framework\exactly;
 
 class FencesTypesQueryList
 {
-    public function handle()
+    public function handle(): OperationResult
     {
         $fenceTypes = FenceType::query()
             ->select([
@@ -15,5 +17,7 @@ class FencesTypesQueryList
             ])
             ->whereHas('fences')
             ->get();
+
+        return OperationResult::success($fenceTypes);
     }
 }

@@ -13,7 +13,7 @@ class FenceTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->randomElement(['Профлист', 'Сварная стека', 'Другое']),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

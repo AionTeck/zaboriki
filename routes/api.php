@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('v1')->group(function () {
+    Route::prefix('/fences')->group(function () {
+        Route::get('/types', [\App\Http\Controllers\Api\V1\FenceController::class, 'getTypes']);
+    });
+});

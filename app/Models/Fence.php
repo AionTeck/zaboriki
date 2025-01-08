@@ -39,6 +39,6 @@ class Fence extends Model
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(FenceType::class);
+        return $this->belongsTo(FenceType::class, 'type_id', 'id');
     }
 }
