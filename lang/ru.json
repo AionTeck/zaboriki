@@ -220,5 +220,14 @@
     "Yes": "Да",
     "You are receiving this email because we received a password reset request for your account.": "Вы получили это письмо, потому что мы получили запрос на сброс пароля для Вашей учётной записи.",
     "Name": "Название",
-    "Measurement": "Единица измерения"
+    "Measurement": "Единица измерения",
+    "Specs": "Характеристики",
+    "Spec": "Характеристика",
+    "Value": "Значение",
+    "Combinations": "Комбинации",
+    "height": "Высота",
+    "width": "Ширина",
+    "color": "Цвет",
+    "Spec type": "Тип характеристики",
+    "Colors": "Цвета"
 }

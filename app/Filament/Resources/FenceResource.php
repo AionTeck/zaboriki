@@ -2,8 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Enum\SpecType;
 use App\Filament\Resources\FenceResource\Pages;
 use App\Models\Fence;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\HasManyRepeater;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -40,6 +45,46 @@ class FenceResource extends Resource
                     ->relationship('measurement', 'name')
                     ->preload()
                     ->searchable(),
+
+                Repeater::make('colors')
+                    ->relationship('colors')
+                    ->translateLabel()
+                    ->columnSpanFull()
+                    ->schema([
+                        Hidden::make('spec_type')
+                            ->default(SpecType::COLOR->value),
+
+                        ColorPicker::make('value')
+                            ->label('Цвет')
+                            ->required(),
+                    ])
+                    ->addActionLabel('Добавить цвет'),
+
+                Repeater::make('specs')
+                    ->relationship('specs')
+                    ->translateLabel()
+                    ->columnSpanFull()
+                    ->schema([
+                        Select::make('spec_type')
+                            ->options(function () {
+                                $types = SpecType::toTranslatedArray();
+
+                                unset($types['color']);
+
+                                return $types;
+                            })
+                            ->translateLabel()
+                            ->required(),
+
+                        TextInput::make('value')
+                            ->translateLabel()
+                            ->required(),
+
+                        TextInput::make('price')
+                            ->required()
+                            ->numeric()
+                    ])
+                    ->addActionLabel('Добавить комбинацию'),
             ]);
     }
 
