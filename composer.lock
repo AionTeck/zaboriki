@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a47e888ddd7e631e5e16945b86ef8032",
+    "content-hash": "0a15ea6d82e26feecfabc8056e9d3a95",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -9038,6 +9038,52 @@
                 }
             ],
             "time": "2024-11-08T15:28:48+00:00"
+        },
+        {
+            "name": "thumbrise/toolkit",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thumbrise/l-toolkit.git",
+                "reference": "36c64e9b05699e38d2a3bc6b9e2222d0617e2dd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thumbrise/l-toolkit/zipball/36c64e9b05699e38d2a3bc6b9e2222d0617e2dd2",
+                "reference": "36c64e9b05699e38d2a3bc6b9e2222d0617e2dd2",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=10.0",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0 || ^7.0 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Thumbrise\\Toolkit\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruslan Kokoev",
+                    "email": "ruslan.kokoev.1999@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/thumbrise/l-toolkit/issues",
+                "source": "https://github.com/thumbrise/l-toolkit/tree/1.2.1"
+            },
+            "time": "2024-04-20T22:54:16+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
