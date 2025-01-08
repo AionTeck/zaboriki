@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Fence extends Model
 {
@@ -18,6 +17,7 @@ class Fence extends Model
     protected $fillable = [
         'name',
         'measurement_id',
+        'type_id'
     ];
 
     public function measurement(): BelongsTo
@@ -35,5 +35,10 @@ class Fence extends Model
     {
         return $this->hasMany(FenceSpec::class)
             ->where('spec_type', SpecType::COLOR->value);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(FenceType::class);
     }
 }

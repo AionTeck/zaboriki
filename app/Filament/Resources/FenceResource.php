@@ -46,10 +46,21 @@ class FenceResource extends Resource
                     ->preload()
                     ->searchable(),
 
+                Select::make('type')
+                    ->translateLabel()
+                    ->required()
+                    ->relationship('type', 'name')
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->translateLabel()
+                            ->required()
+                    ]),
+
                 Repeater::make('colors')
                     ->relationship('colors')
                     ->translateLabel()
                     ->columnSpanFull()
+                    ->minItems(1)
                     ->schema([
                         Hidden::make('spec_type')
                             ->default(SpecType::COLOR->value),
@@ -64,6 +75,7 @@ class FenceResource extends Resource
                     ->relationship('specs')
                     ->translateLabel()
                     ->columnSpanFull()
+                    ->minItems(1)
                     ->schema([
                         Select::make('spec_type')
                             ->options(function () {
@@ -93,12 +105,18 @@ class FenceResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('measurement.name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('type.name')
+                    ->translateLabel()
+                    ->sortable()
             ])
             ->filters([
                 //
