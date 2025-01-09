@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Spatie\LaravelData\Exceptions\CannotCastData;
 use Throwable;
+use Thumbrise\Toolkit\Opresult\OperationResult;
 
 class Handler extends ExceptionHandler
 {
@@ -25,6 +28,18 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (ValidationException $e, $request) {
+            $validationErrors = $e->getMessage();
+
+            $opResult = OperationResult::error($validationErrors, 422);
+
+            $response = $opResult->toResponse($request);
+
+            $response->setStatusCode(422);
+
+            return $response;
         });
     }
 }

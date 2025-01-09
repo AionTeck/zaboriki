@@ -14,7 +14,7 @@ class FenceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->word(),
             'measurement_id' => Measurement::factory(),
             'type_id' => FenceType::factory(),
         ];
