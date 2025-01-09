@@ -18,3 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 /htdocs
+_ide_helper_models.php
+/storage/api-docs
