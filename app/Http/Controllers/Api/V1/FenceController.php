@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Data\FenceRequest;
+use App\Domain\Contexts\Fence\FenceDomainQueryList;
 use App\UseCases\Queries\FencesQueryList;
 use App\UseCases\Queries\FencesTypesQueryList;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class FenceController extends BaseController
     )]
     public function index(Request $request, FencesQueryList $queryList)
     {
-        $data = FenceRequest::from($request);
+        $data = FenceDomainQueryList::from($request);
 
         return $queryList->handle($data);
     }

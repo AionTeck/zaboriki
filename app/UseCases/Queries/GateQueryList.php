@@ -2,27 +2,27 @@
 
 namespace App\UseCases\Queries;
 
-use App\Domain\Contexts\Fence\FenceDomainQueryList;
-use App\Models\Fence;
+use App\Domain\Contexts\Gate\GateDomainQueryList;
+use App\Models\Gate;
 use Illuminate\Database\Eloquent\Builder;
 use Thumbrise\Toolkit\Opresult\OperationResult;
 
-class FencesQueryList
+class GateQueryList
 {
-    public function handle(FenceDomainQueryList $data): OperationResult
+    public function handle(GateDomainQueryList $data): OperationResult
     {
-        $fencesList = Fence::query()
+        $gatesList = Gate::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->when($data->typeId, function (Builder $query) use ($data) {
                 $query->whereHas('type', function (Builder $query) use ($data) {
-                    $query->where('fence_types.id', $data->typeId);
+                    $query->where('id', $data->typeId);
                 });
             })
             ->get();
 
-        return OperationResult::success($fencesList);
+        return OperationResult::success($gatesList);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api\Fences;
 
 use App\Models\Fence;
 use App\Models\FenceType;
