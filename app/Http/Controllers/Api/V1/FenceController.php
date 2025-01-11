@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Domain\Contexts\Fence\FenceDomainQueryList;
-use App\UseCases\Queries\FencesQueryOne;
 use App\UseCases\Queries\FencesQueryList;
+use App\UseCases\Queries\FencesQueryOne;
 use App\UseCases\Queries\FencesTypesQueryList;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OAT;
@@ -37,7 +37,7 @@ class FenceController extends BaseController
                 description: 'Fence type ID',
                 required: false,
                 schema: new OAT\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OAT\Response(
@@ -63,7 +63,7 @@ class FenceController extends BaseController
                 description: 'Fence ID',
                 required: true,
                 schema: new OAT\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OAT\Response(

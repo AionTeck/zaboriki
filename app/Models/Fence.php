@@ -18,7 +18,7 @@ class Fence extends Model
     protected $fillable = [
         'name',
         'measurement_id',
-        'type_id'
+        'type_id',
     ];
 
     public function measurement(): BelongsTo

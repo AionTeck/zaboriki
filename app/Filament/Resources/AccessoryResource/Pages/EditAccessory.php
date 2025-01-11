@@ -37,11 +37,11 @@ class EditAccessory extends EditRecord
                     ]);
                 }
             } else {
-                    DB::table('accessoryables')->insert([
-                        'accessory_id' => $record->id,
-                        'accessoryable_type' => $binding['entity_type'],
-                        'accessoryable_id' => null,
-                    ]);
+                DB::table('accessoryables')->insert([
+                    'accessory_id' => $record->id,
+                    'accessoryable_type' => $binding['entity_type'],
+                    'accessoryable_id' => null,
+                ]);
             }
         }
         unset($record->entity_bindings);

@@ -13,7 +13,6 @@ class AutomaticForGatesDomainQueryList extends Data
         #[IntegerType]
         #[Min(1)]
         public ?int $gateTypeId
-    )
-    {
+    ) {
     }
 }

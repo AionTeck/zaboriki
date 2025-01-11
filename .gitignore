@@ -20,3 +20,4 @@ yarn-error.log
 /htdocs
 _ide_helper_models.php
 /storage/api-docs
+.php-cs-fixer.cache

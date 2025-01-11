@@ -14,7 +14,7 @@ class FencesQueryList
         $fencesList = Fence::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->when($data->typeId, function (Builder $query) use ($data) {
                 $query->whereHas('type', function (Builder $query) use ($data) {

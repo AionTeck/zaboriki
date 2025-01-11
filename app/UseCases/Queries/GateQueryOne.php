@@ -12,7 +12,7 @@ class GateQueryOne
         $gate = Gate::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->where('id', '=', $id)
             ->firstOrFail();

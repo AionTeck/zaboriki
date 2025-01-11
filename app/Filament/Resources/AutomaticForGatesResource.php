@@ -28,6 +28,7 @@ class AutomaticForGatesResource extends Resource
     protected static ?string $modelLabel = 'Автоматика для ворот';
 
     protected static ?string $pluralModelLabel = 'Автоматика для ворот';
+
     protected static bool $hasTitleCaseModelLabel = false;
 
     public static function form(Form $form): Form
@@ -49,8 +50,8 @@ class AutomaticForGatesResource extends Resource
                         TextInput::make('price')
                             ->translateLabel()
                             ->numeric()
-                            ->minValue(0)
-                    ])
+                            ->minValue(0),
+                    ]),
             ]);
     }
 
@@ -63,7 +64,7 @@ class AutomaticForGatesResource extends Resource
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('specs.gateType.name')
-                    ->translateLabel()
+                    ->translateLabel(),
             ])
             ->filters([
                 //

@@ -31,9 +31,9 @@ class GetAllTest extends TestCase
             'data' => [
                 '*' => [
                     'id',
-                    'name'
-                ]
-            ]
+                    'name',
+                ],
+            ],
         ]);
     }
 
@@ -50,7 +50,7 @@ class GetAllTest extends TestCase
             ->create();
 
         $queryParams = http_build_query([
-            'typeId' => $fenceType->id
+            'typeId' => $fenceType->id,
         ]);
 
         $response = $this->get("api/v1/fences?$queryParams");
@@ -71,7 +71,7 @@ class GetAllTest extends TestCase
             ->create();
 
         $queryParams = http_build_query([
-            'typeId' => 'someString'
+            'typeId' => 'someString',
         ]);
 
         $response = $this->get("api/v1/fences?$queryParams");
@@ -81,7 +81,7 @@ class GetAllTest extends TestCase
         $response->assertJsonStructure([
             'error_message',
             'error_code',
-            'error_context'
+            'error_context',
         ]);
     }
 }

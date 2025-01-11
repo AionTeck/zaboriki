@@ -12,7 +12,6 @@ class FenceDomainQueryList extends Data
         #[IntegerType]
         #[Min(1)]
         public ?string $typeId
-    )
-    {
+    ) {
     }
 }

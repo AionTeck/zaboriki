@@ -3,8 +3,8 @@
 namespace App\UseCases\Queries;
 
 use App\Models\FenceType;
-use Thumbrise\Toolkit\Opresult\OperationResult;
 use function PHPUnit\Framework\exactly;
+use Thumbrise\Toolkit\Opresult\OperationResult;
 
 class FencesTypesQueryList
 {
@@ -13,7 +13,7 @@ class FencesTypesQueryList
         $fenceTypes = FenceType::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->whereHas('fences')
             ->get();

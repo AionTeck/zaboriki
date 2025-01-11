@@ -12,7 +12,6 @@ class GateDomainQueryList extends Data
         #[IntegerType]
         #[Min(1)]
         public ?string $typeId
-    )
-    {
+    ) {
     }
 }

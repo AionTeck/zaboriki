@@ -20,7 +20,7 @@ class AutomaticForGatesController extends BaseController
                 description: 'Gate type ID',
                 required: false,
                 schema: new OAT\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OAT\Response(
@@ -46,7 +46,7 @@ class AutomaticForGatesController extends BaseController
                 description: 'Automatic for gate ID',
                 required: true,
                 schema: new OAT\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OAT\Response(

@@ -13,7 +13,7 @@ class GatesTypesQueryList
         $typesList = GateType::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->whereHas('gates')
             ->get();

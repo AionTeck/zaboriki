@@ -14,7 +14,7 @@ class Accessoryable extends Model
     protected $fillable = [
         'accessory_id',
         'accessoryable_type',
-        'accessoryable_id'
+        'accessoryable_id',
     ];
 
     public function accessory(): BelongsTo

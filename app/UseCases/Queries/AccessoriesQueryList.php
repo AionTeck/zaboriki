@@ -14,15 +14,15 @@ class AccessoriesQueryList
         $accessory = Accessory::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->when($data->accessoriableType, function (Builder $query) use ($data) {
-                    $query->whereHas('accessoryables', function (Builder $query) use ($data) {
-                        $query->where(
-                            'accessoryables.accessoryable_type',
-                            '=',
-                            $data->accessoriableType->getModel());
-                    });
+                $query->whereHas('accessoryables', function (Builder $query) use ($data) {
+                    $query->where(
+                        'accessoryables.accessoryable_type',
+                        '=',
+                        $data->accessoriableType->getModel());
+                });
             })
             ->get();
 

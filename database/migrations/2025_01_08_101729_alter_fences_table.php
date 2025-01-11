@@ -13,8 +13,7 @@ return new class extends Migration {
                 ->nullable()
                 ->constrained('fence_types')
                 ->cascadeOnUpdate()
-                ->cascadeOnDelete()
-            ;
+                ->cascadeOnDelete();
         });
     }
 
