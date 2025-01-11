@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class AutomaticForGates extends Model
+class AutomaticForGate extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,6 @@ class AutomaticForGates extends Model
 
     public function specs(): HasMany
     {
-        return $this->hasMany(AutomaticForGatesSpec::class, 'automatic_for_gate_id', 'id');
+        return $this->hasMany(AutomaticForGateSpec::class, 'automatic_for_gate_id', 'id');
     }
 }

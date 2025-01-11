@@ -36,6 +36,12 @@ class FenceController extends BaseController
                 description: 'Fence type ID',
                 required: false
             )
+        ],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'OK'
+            ),
         ]
     )]
     public function index(Request $request, FencesQueryList $queryList)

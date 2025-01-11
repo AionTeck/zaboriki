@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AutomaticForGatesResource\Pages;
-use App\Models\AutomaticForGates;
+use App\Models\AutomaticForGate;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -19,7 +19,7 @@ use Filament\Tables\Table;
 
 class AutomaticForGatesResource extends Resource
 {
-    protected static ?string $model = AutomaticForGates::class;
+    protected static ?string $model = AutomaticForGate::class;
 
     protected static ?string $slug = 'automatic-for-gates';
 

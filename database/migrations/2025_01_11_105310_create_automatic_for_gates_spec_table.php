@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('automatic_for_gates_specs', function (Blueprint $table) {
+        Schema::create('automatic_for_gate_specs', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('automatic_for_gate_id')

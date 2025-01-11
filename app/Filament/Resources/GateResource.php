@@ -34,7 +34,7 @@ class GateResource extends Resource
                     ->columnSpanFull()
                     ->required(),
 
-                Select::make('type')
+                Select::make('type_id')
                     ->translateLabel()
                     ->relationship('type', 'name')
                     ->createOptionForm([

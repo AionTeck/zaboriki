@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AutomaticForGatesSpec extends Model
+class AutomaticForGateSpec extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class AutomaticForGatesSpec extends Model
 
     public function automaticForGates(): BelongsTo
     {
-        return $this->belongsTo(AutomaticForGates::class, 'automatic_for_gate_id', 'id');
+        return $this->belongsTo(AutomaticForGate::class, 'automatic_for_gate_id', 'id');
     }
 
     public function gateType(): BelongsTo

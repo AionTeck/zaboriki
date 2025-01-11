@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\AutomaticForGates;
-use App\Models\AutomaticForGatesSpec;
+use App\Models\AutomaticForGate;
+use App\Models\AutomaticForGateSpec;
 use App\Models\GateType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class AutomaticForGatesSpecFactory extends Factory
+class AutomaticForGateSpecFactory extends Factory
 {
-    protected $model = AutomaticForGatesSpec::class;
+    protected $model = AutomaticForGateSpec::class;
 
     public function definition(): array
     {
@@ -19,7 +19,7 @@ class AutomaticForGatesSpecFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'automatic_for_gates_id' => AutomaticForGates::factory(),
+            'automatic_for_gate_id' => AutomaticForGate::factory(),
             'gate_type_id' => GateType::factory(),
         ];
     }
