@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\GateResource\Pages;
-use App\Models\Gate;
+use App\Filament\Resources\AutomaticForGatesResource\Pages;
+use App\Models\AutomaticForGate;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -17,16 +17,18 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class GateResource extends Resource
+class AutomaticForGatesResource extends Resource
 {
-    protected static ?string $model = Gate::class;
+    protected static ?string $model = AutomaticForGate::class;
 
-    protected static ?string $slug = 'gates';
+    protected static ?string $slug = 'automatic-for-gates';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $modelLabel = 'Ворота';
-    protected static ?string $pluralModelLabel = 'Ворота';
+    protected static ?string $modelLabel = 'Автоматика для ворот';
+
+    protected static ?string $pluralModelLabel = 'Автоматика для ворот';
+    protected static bool $hasTitleCaseModelLabel = false;
 
     public static function form(Form $form): Form
     {
@@ -34,36 +36,20 @@ class GateResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->translateLabel()
-                    ->columnSpanFull()
                     ->required(),
-
-                Select::make('type_id')
-                    ->translateLabel()
-                    ->relationship('type', 'name')
-                    ->createOptionForm([
-                        TextInput::make('name')
-                            ->required()
-                    ])
-                    ->helperText('К примеру: Распашной или Откатной'),
 
                 Repeater::make('specs')
                     ->translateLabel()
                     ->columnSpanFull()
                     ->relationship('specs')
-                    ->minItems(1)
                     ->schema([
-                        TextInput::make('width')
+                        Select::make('gate_type_id')
                             ->translateLabel()
-                            ->required()
-                            ->numeric(),
-                        TextInput::make('height')
-                            ->translateLabel()
-                            ->required()
-                            ->numeric(),
+                            ->relationship('gateType', 'name'),
                         TextInput::make('price')
                             ->translateLabel()
-                            ->required()
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(0)
                     ])
             ]);
     }
@@ -73,8 +59,11 @@ class GateResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('specs.gateType.name')
+                    ->translateLabel()
             ])
             ->filters([
                 //
@@ -93,9 +82,9 @@ class GateResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListGates::route('/'),
-            'create' => Pages\CreateGate::route('/create'),
-            'edit' => Pages\EditGate::route('/{record}/edit'),
+            'index' => Pages\ListAutomaticForGates::route('/'),
+            'create' => Pages\CreateAutomaticForGates::route('/create'),
+            'edit' => Pages\EditAutomaticForGates::route('/{record}/edit'),
         ];
     }
 

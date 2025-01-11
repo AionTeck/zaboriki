@@ -2,9 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Core\Error;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Spatie\LaravelData\Exceptions\CannotCastData;
 use Throwable;
 use Thumbrise\Toolkit\Opresult\OperationResult;
 
@@ -30,10 +31,10 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(function (ValidationException $e, $request) {
+        $this->renderable(function (ValidationException $e, Request $request) {
             $validationErrors = $e->getMessage();
 
-            $opResult = OperationResult::error($validationErrors, 422);
+            $opResult = OperationResult::error($validationErrors, Error::INVALID_INPUT);
 
             $response = $opResult->toResponse($request);
 
