@@ -18,4 +18,9 @@ class GateType extends Model
     {
         return $this->hasMany(Gate::class, 'type_id', 'id');
     }
+
+    public function automaticForGatesSpec(): HasMany
+    {
+        return $this->hasMany(AutomaticForGatesSpec::class, 'gate_type_id', 'id');
+    }
 }
