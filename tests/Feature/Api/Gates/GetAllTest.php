@@ -21,7 +21,7 @@ class GetAllTest extends TestCase
             )
             ->create();
 
-        $response = $this->get("api/v1/gates");
+        $response = $this->get('api/v1/gates');
 
         $response->assertSuccessful();
 
@@ -31,9 +31,9 @@ class GetAllTest extends TestCase
             'data' => [
                 '*' => [
                     'id',
-                    'name'
-                ]
-            ]
+                    'name',
+                ],
+            ],
         ]);
     }
 
@@ -56,7 +56,7 @@ class GetAllTest extends TestCase
             ->create();
 
         $queryParams = http_build_query([
-            'typeId' => $type->id
+            'typeId' => $type->id,
         ]);
 
         $response = $this->get("api/v1/gates?$queryParams");
@@ -69,9 +69,9 @@ class GetAllTest extends TestCase
             'data' => [
                 '*' => [
                     'id',
-                    'name'
-                ]
-            ]
+                    'name',
+                ],
+            ],
         ]);
     }
 
@@ -94,7 +94,7 @@ class GetAllTest extends TestCase
             ->create();
 
         $queryParams = http_build_query([
-            'typeId' => 'someTypeId'
+            'typeId' => 'someTypeId',
         ]);
 
         $response = $this->get("api/v1/gates?$queryParams");
@@ -102,7 +102,7 @@ class GetAllTest extends TestCase
         $response->assertJsonStructure([
             'error_message',
             'error_code',
-            'error_context'
+            'error_context',
         ]);
 
         $response->assertStatus(422);

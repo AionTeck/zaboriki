@@ -43,7 +43,7 @@ class GetOneTest extends TestCase
             ->for($accessory)
             ->create([
                 'accessoryable_type' => $accessoryableTypeGate->getModel(),
-                'accessoryable_id' => $gate->id
+                'accessoryable_id' => $gate->id,
             ]);
 
         $response = $this->get('api/v1/accessories/' . $accessory->id);
@@ -54,7 +54,7 @@ class GetOneTest extends TestCase
             'data' => [
                 'id',
                 'name',
-            ]
+            ],
         ]);
     }
 
@@ -85,7 +85,7 @@ class GetOneTest extends TestCase
             ->for($accessory)
             ->create([
                 'accessoryable_type' => $accessoryableTypeGate->getModel(),
-                'accessoryable_id' => $gate->id
+                'accessoryable_id' => $gate->id,
             ]);
 
         $response = $this->get('api/v1/accessories/' . 1000);

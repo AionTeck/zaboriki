@@ -33,7 +33,7 @@ class GetOneTest extends TestCase
             'data' => [
                 'id',
                 'name',
-            ]
+            ],
         ]);
     }
 
@@ -50,7 +50,7 @@ class GetOneTest extends TestCase
             )
             ->create();
 
-        $response = $this->get("/api/v1/automatic-for-gates/1000");
+        $response = $this->get('/api/v1/automatic-for-gates/1000');
 
         $response->assertNotFound();
     }

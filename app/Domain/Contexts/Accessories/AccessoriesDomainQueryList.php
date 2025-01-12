@@ -11,7 +11,6 @@ class AccessoriesDomainQueryList extends Data
     public function __construct(
         #[Enum(AccessoryableType::class)]
         public ?AccessoryableType $accessoriableType
-    )
-    {
+    ) {
     }
 }

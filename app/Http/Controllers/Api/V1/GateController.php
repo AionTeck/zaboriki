@@ -36,7 +36,7 @@ class GateController extends BaseController
                 name: 'typeId',
                 description: 'Gate type ID',
                 required: false
-            )
+            ),
         ],
         responses: [
             new OAT\Response(
@@ -62,7 +62,7 @@ class GateController extends BaseController
                 description: 'Gate ID',
                 required: true,
                 schema: new OAT\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OAT\Response(

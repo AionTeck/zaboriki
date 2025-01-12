@@ -26,7 +26,7 @@ class GetAllTest extends TestCase
             ->create();
 
         $queryParams = http_build_query([
-            'gateTypeId' => $gateType->id
+            'gateTypeId' => $gateType->id,
         ]);
 
         $response = $this->get("/api/v1/automatic-for-gates?$queryParams");
@@ -40,8 +40,8 @@ class GetAllTest extends TestCase
                 '*' => [
                     'id',
                     'name',
-                ]
-            ]
+                ],
+            ],
         ]);
     }
 }

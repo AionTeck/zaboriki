@@ -22,7 +22,7 @@ class AccessoriesController extends Controller
                 description: 'Accessoriable type for accessories',
                 required: false,
                 schema: new OAT\Schema(enum: AccessoryableType::class)
-            )
+            ),
         ],
         responses: [
             new OAT\Response(
@@ -48,7 +48,7 @@ class AccessoriesController extends Controller
                 description: 'Accessoriable ID',
                 required: true,
                 schema: new OAT\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OAT\Response(

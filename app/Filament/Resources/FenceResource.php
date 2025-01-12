@@ -25,10 +25,15 @@ use Illuminate\Database\Eloquent\Model;
 class FenceResource extends Resource
 {
     protected static ?string $model = Fence::class;
+
     protected static ?string $slug = 'fences';
+
     protected static ?string $navigationLabel = 'Заборы';
+
     protected static ?string $modelLabel = 'Забор';
+
     protected static ?string $pluralLabel = 'Заборы';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -53,7 +58,7 @@ class FenceResource extends Resource
                     ->createOptionForm([
                         TextInput::make('name')
                             ->translateLabel()
-                            ->required()
+                            ->required(),
                     ]),
 
                 Repeater::make('colors')
@@ -95,7 +100,7 @@ class FenceResource extends Resource
                         TextInput::make('price')
                             ->translateLabel()
                             ->required()
-                            ->numeric()
+                            ->numeric(),
                     ])
                     ->addActionLabel('Добавить комбинацию'),
             ]);
@@ -117,7 +122,7 @@ class FenceResource extends Resource
 
                 TextColumn::make('type.name')
                     ->translateLabel()
-                    ->sortable()
+                    ->sortable(),
             ])
             ->filters([
                 //

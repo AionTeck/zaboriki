@@ -30,8 +30,8 @@ class GetOneTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 'id',
-                'name'
-            ]
+                'name',
+            ],
         ]);
     }
 
@@ -47,7 +47,7 @@ class GetOneTest extends TestCase
             )
             ->create();
 
-        $response = $this->get("api/v1/fences/1000");
+        $response = $this->get('api/v1/fences/1000');
 
         $response->assertNotFound();
     }

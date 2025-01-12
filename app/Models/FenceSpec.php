@@ -14,7 +14,7 @@ class FenceSpec extends Model
         'fence_id',
         'spec_type',
         'value',
-        'price'
+        'price',
     ];
 
     public function fence(): BelongsTo

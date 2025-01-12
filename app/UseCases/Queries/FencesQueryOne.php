@@ -14,7 +14,7 @@ class FencesQueryOne
         $fence = Fence::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->where('id', '=', $id)
             ->firstOrFail();

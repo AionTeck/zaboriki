@@ -59,7 +59,7 @@ class AccessoryResource extends Resource
                             ->required()
                             ->live()
                             ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
-                                if($state !== $old) {
+                                if ($state !== $old) {
                                     $set('entity_ids', []);
                                 }
                             }),
@@ -71,6 +71,7 @@ class AccessoryResource extends Resource
                                 if ($type) {
                                     return $type::pluck('name', 'id');
                                 }
+
                                 return [];
                             })
                             ->multiple()
@@ -79,7 +80,6 @@ class AccessoryResource extends Resource
                             ->nullable(),
                     ])
                     ->afterStateHydrated(function (Get $get, Set $set) {
-
                         $accessory = Accessory::firstWhere('id', '=', $get('id'));
 
                         if ($accessory) {
@@ -97,7 +97,7 @@ class AccessoryResource extends Resource
                                 $accessoryable_ids = [];
 
                                 foreach ($bindings as $binding) {
-                                    if (!$binding->accessoryable_id) {
+                                    if (! $binding->accessoryable_id) {
                                         break;
                                     }
 
@@ -116,11 +116,11 @@ class AccessoryResource extends Resource
                             $array = $get('entity_bindings.*.entity_type');
 
                             if (count($array) !== count(array_unique($array))) {
-                                $fail("Должны быть уникальные типы сущности");
+                                $fail('Должны быть уникальные типы сущности');
                             }
                         },
                     ])
-                    ->hidden(fn(Get $get) => !$get('id'))
+                    ->hidden(fn (Get $get) => ! $get('id'))
                     ->columnSpanFull(),
 
                 Repeater::make('specs')
@@ -137,7 +137,7 @@ class AccessoryResource extends Resource
                             ->required()
                             ->numeric()
                             ->minValue(0),
-                    ])
+                    ]),
             ]);
     }
 

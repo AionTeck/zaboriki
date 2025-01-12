@@ -20,5 +20,4 @@ use OpenApi\Attributes as OAT;
 )]
 class BaseController extends Controller
 {
-
 }

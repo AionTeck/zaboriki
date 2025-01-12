@@ -44,10 +44,10 @@ class GetAllTest extends TestCase
             ->for($accessory)
             ->create([
                 'accessoryable_type' => $accessoryableType->getModel(),
-                'accessoryable_id' => $gate->id
+                'accessoryable_id' => $gate->id,
             ]);
 
-        $response = $this->get("api/v1/accessories");
+        $response = $this->get('api/v1/accessories');
 
         $response->assertSuccessful();
 
@@ -89,11 +89,11 @@ class GetAllTest extends TestCase
             ->for($accessory)
             ->create([
                 'accessoryable_type' => $accessoryableTypeGate->getModel(),
-                'accessoryable_id' => $gate->id
+                'accessoryable_id' => $gate->id,
             ]);
 
         $queryParams = http_build_query([
-            'accessoriableType' => $accessoryableTypeGate->value
+            'accessoriableType' => $accessoryableTypeGate->value,
         ]);
 
         $response = $this->get("api/v1/accessories?$queryParams");
@@ -110,7 +110,7 @@ class GetAllTest extends TestCase
         ]);
 
         $queryParams = http_build_query([
-            'accessoriableType' => $accessoryableTypeFence->value
+            'accessoriableType' => $accessoryableTypeFence->value,
         ]);
 
         $response = $this->get("api/v1/accessories?$queryParams");
@@ -147,11 +147,11 @@ class GetAllTest extends TestCase
             ->for($accessory)
             ->create([
                 'accessoryable_type' => $accessoryableTypeGate->getModel(),
-                'accessoryable_id' => $gate->id
+                'accessoryable_id' => $gate->id,
             ]);
 
         $queryParams = http_build_query([
-            'accessoriableType' => 'invalid'
+            'accessoriableType' => 'invalid',
         ]);
 
         $response = $this->get("api/v1/accessories?$queryParams");
@@ -161,7 +161,7 @@ class GetAllTest extends TestCase
         $response->assertJsonStructure([
             'error_message',
             'error_code',
-            'error_context'
+            'error_context',
         ]);
 
         $response->assertJsonPath('error_code', Error::INVALID_INPUT->name);

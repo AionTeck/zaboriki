@@ -14,7 +14,7 @@ class AutomaticForGatesQueryList
         $automaticForGatesList = AutomaticForGate::query()
             ->select([
                 'id',
-                'name'
+                'name',
             ])
             ->when($data->gateTypeId, function (Builder $query) use ($data) {
                 $query->whereHas('specs', function (Builder $query) use ($data) {
