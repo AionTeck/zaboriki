@@ -29,4 +29,9 @@ Route::prefix('v1')->group(function () {
         Route::get('/', [App\Http\Controllers\Api\V1\AccessoriesController::class, 'index']);
         Route::get('/{id}', [App\Http\Controllers\Api\V1\AccessoriesController::class, 'show']);
     });
+
+    Route::prefix('mountings')->group(function () {
+        Route::get('/', [App\Http\Controllers\Api\V1\MountingController::class, 'index']);
+        Route::get('/{id}', [App\Http\Controllers\Api\V1\MountingController::class, 'view']);
+    });
 });
