@@ -25,6 +25,9 @@ class GateResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $modelLabel = 'Ворота';
+    protected static ?string $pluralModelLabel = 'Ворота';
+
     public static function form(Form $form): Form
     {
         return $form

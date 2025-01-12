@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Fence extends Model
 {
@@ -40,5 +41,10 @@ class Fence extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(FenceType::class, 'type_id', 'id');
+    }
+
+    public function polyAccessory(): MorphMany
+    {
+        return $this->morphMany(Accessoryable::class, 'accessoryable');
     }
 }

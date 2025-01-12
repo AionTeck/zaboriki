@@ -6,4 +6,5 @@ enum Error
 {
     case NOT_FOUND;
     case FORBIDDEN;
+    case INVALID_INPUT;
 }

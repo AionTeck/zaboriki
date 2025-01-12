@@ -93,6 +93,7 @@ class FenceResource extends Resource
                             ->required(),
 
                         TextInput::make('price')
+                            ->translateLabel()
                             ->required()
                             ->numeric()
                     ])

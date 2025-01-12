@@ -25,6 +25,11 @@ class AutomaticForGatesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $modelLabel = 'Автоматика для ворот';
+
+    protected static ?string $pluralModelLabel = 'Автоматика для ворот';
+    protected static bool $hasTitleCaseModelLabel = false;
+
     public static function form(Form $form): Form
     {
         return $form
