@@ -10,7 +10,7 @@ use App\UseCases\Queries\AccessoriesQueryOne;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OAT;
 
-class AccessoriesController extends Controller
+class AccessoriesController extends BaseController
 {
     #[OAT\Get(
         path: '/accessories',
