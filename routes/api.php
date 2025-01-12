@@ -10,11 +10,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::prefix('fences')->group(function () {
         Route::get('', [\App\Http\Controllers\Api\V1\FenceController::class, 'index']);
-        Route::get('types', [\App\Http\Controllers\Api\V1\FenceController::class, 'getTypes']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\V1\FenceController::class, 'show']);
+        Route::get('/types', [\App\Http\Controllers\Api\V1\FenceController::class, 'getTypes']);
     });
 
     Route::prefix('gates')->group(function () {
         Route::get('', [\App\Http\Controllers\Api\V1\GateController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\V1\GateController::class, 'show']);
         Route::get('types', [\App\Http\Controllers\Api\V1\GateController::class, 'getTypes']);
     });
 });
