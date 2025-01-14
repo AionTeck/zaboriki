@@ -34,10 +34,6 @@ class GetAllTest extends TestCase
                 AccessorySpec::factory(2),
                 'specs'
             )
-            ->for(
-                Measurement::factory()
-                    ->create()
-            )
             ->create();
 
         Accessoryable::factory()
@@ -79,10 +75,7 @@ class GetAllTest extends TestCase
                 AccessorySpec::factory(2),
                 'specs'
             )
-            ->for(
-                Measurement::factory()
-                    ->create()
-            )
+
             ->create();
 
         Accessoryable::factory()
@@ -137,10 +130,7 @@ class GetAllTest extends TestCase
                 AccessorySpec::factory(2),
                 'specs'
             )
-            ->for(
-                Measurement::factory()
-                    ->create()
-            )
+
             ->create();
 
         Accessoryable::factory()

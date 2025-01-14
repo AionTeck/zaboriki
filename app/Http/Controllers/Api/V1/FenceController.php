@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Domain\Contexts\Fence\FenceDomainQueryList;
+use App\UseCases\Queries\FenceQueryOneWithSpecs;
 use App\UseCases\Queries\FencesQueryList;
 use App\UseCases\Queries\FencesQueryOne;
 use App\UseCases\Queries\FencesTypesQueryList;
@@ -75,5 +76,10 @@ class FenceController extends BaseController
     public function show(int $id, FencesQueryOne $queryGetOne)
     {
         return $queryGetOne->handle($id);
+    }
+
+    public function getSpecs(int $id, FenceQueryOneWithSpecs $specs)
+    {
+        return $specs->handle($id);
     }
 }

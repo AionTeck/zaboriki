@@ -3,8 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Enum\AccessoryableType;
+use App\Enum\Measurement;
 use App\Filament\Resources\AccessoryResource\Pages;
 use App\Models\Accessory;
+use App\Models\Fence;
 use Closure;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -22,6 +24,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
 
 class AccessoryResource extends Resource
 {
@@ -43,12 +46,10 @@ class AccessoryResource extends Resource
                     ->translateLabel()
                     ->required(),
 
-                Select::make('measurement_id')
+                Select::make('measurement_type')
                     ->translateLabel()
-                    ->relationship('measurement', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required(),
+                    ->required()
+                    ->options(Measurement::toTranslatedArray()),
 
                 Repeater::make('entity_bindings')
                     ->label('Привязка к сущностям')
@@ -150,10 +151,9 @@ class AccessoryResource extends Resource
                     ->sortable()
                     ->translateLabel(),
 
-                TextColumn::make('measurement.name')
-                    ->searchable()
-                    ->sortable()
-                    ->translateLabel(),
+                TextColumn::make('measurement_type')
+                    ->translateLabel()
+                    ->state(fn(Accessory $accessory) => Lang::get($accessory->measurement_type->value)),
             ])
             ->filters([
                 //

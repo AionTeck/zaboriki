@@ -6,6 +6,7 @@ use App\Core\Error;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 use Thumbrise\Toolkit\Opresult\OperationResult;
 
@@ -39,6 +40,18 @@ class Handler extends ExceptionHandler
             $response = $opResult->toResponse($request);
 
             $response->setStatusCode(422);
+
+            return $response;
+        });
+
+        $this->renderable(function (NotFoundHttpException $e, Request $request) {
+            $validationErrors = $e->getMessage();
+
+            $opResult = OperationResult::error($validationErrors, Error::NOT_FOUND);
+
+            $response = $opResult->toResponse($request);
+
+            $response->setStatusCode(404);
 
             return $response;
         });

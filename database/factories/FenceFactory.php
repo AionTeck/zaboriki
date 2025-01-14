@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enum\Measurement;
 use App\Models\Fence;
 use App\Models\FenceType;
-use App\Models\Measurement;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FenceFactory extends Factory
@@ -15,7 +15,7 @@ class FenceFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'measurement_id' => Measurement::factory(),
+            'measurement_type' => $this->faker->randomElement(Measurement::cases()),
             'type_id' => FenceType::factory(),
         ];
     }

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enum\Measurement;
 use App\Models\Accessory;
-use App\Models\Measurement;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -18,7 +18,7 @@ class AccessoryFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
-            'measurement_id' => Measurement::factory(),
+            'measurement_type' => $this->faker->randomElement(Measurement::cases())
         ];
     }
 }

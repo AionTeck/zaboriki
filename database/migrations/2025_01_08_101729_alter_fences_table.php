@@ -14,6 +14,8 @@ return new class extends Migration {
                 ->constrained('fence_types')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->string('color')
+                ->nullable();
         });
     }
 

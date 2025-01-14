@@ -53,7 +53,7 @@ class GateController extends BaseController
     }
 
     #[OAT\Get(
-        path: '/gates/{id]',
+        path: '/gates/{id}',
         summary: 'Get gate by ID',
         tags: ['Gates'],
         parameters: [

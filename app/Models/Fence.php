@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\Measurement;
 use App\Enum\SpecType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,25 +18,17 @@ class Fence extends Model
 
     protected $fillable = [
         'name',
-        'measurement_id',
+        'measurement_type',
         'type_id',
     ];
 
-    public function measurement(): BelongsTo
-    {
-        return $this->belongsTo(Measurement::class);
-    }
+    protected $casts = [
+        'measurement_type' => Measurement::class
+    ];
 
     public function specs(): HasMany
     {
-        return $this->hasMany(FenceSpec::class)
-            ->whereNot('spec_type', '=', SpecType::COLOR->value);
-    }
-
-    public function colors(): HasMany
-    {
-        return $this->hasMany(FenceSpec::class)
-            ->where('spec_type', SpecType::COLOR->value);
+        return $this->hasMany(FenceSpec::class);
     }
 
     public function type(): BelongsTo

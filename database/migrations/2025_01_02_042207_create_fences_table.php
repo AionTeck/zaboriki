@@ -10,12 +10,8 @@ return new class extends Migration {
         Schema::create('fences', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->foreignId('measurement_id')
-                ->nullable()
-                ->index()
-                ->constrained('measurements')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+            $table->string('measurement_type')
+                ->nullable();
         });
     }
 

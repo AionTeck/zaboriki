@@ -25,8 +25,8 @@ class MountingController extends BaseController
     }
 
     #[OAT\Get(
-        path: '/mountings',
-        summary: 'Get all mountings',
+        path: '/mountings/{id}',
+        summary: 'Get mounting by ID',
         tags: ['Mountings'],
         parameters: [
             new OAT\PathParameter(
