@@ -21,6 +21,7 @@ class FenceQueryOneWithSpecs
 
         $specs = FenceSpec::query()
             ->select([
+                'id as spec_id',
                 'value',
                 'price'
             ])

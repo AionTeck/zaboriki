@@ -1,17 +1,15 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api\Fences;
 
-use App\Enum\SpecType;
 use App\Models\Fence;
 use App\Models\FenceCombination;
 use App\Models\FenceSpec;
 use App\Models\FenceType;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class GetOneCombinationsTest extends TestCase
+class GetOneWithSpecsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -43,7 +41,20 @@ class GetOneCombinationsTest extends TestCase
 
         $response = $this->get('/api/v1/fences/' . $fence->id . '/specs');
 
-        var_dump($response->json());
-        exit();
+        $response->assertSuccessful();
+
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'name',
+                'specs' => [
+                    '*' => [
+                        'spec_id',
+                        'value',
+                        'price'
+                    ]
+                ]
+            ]
+        ]);
     }
 }

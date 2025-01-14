@@ -19,6 +19,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/', [App\Http\Controllers\Api\V1\GateController::class, 'index']);
         Route::get('types', [App\Http\Controllers\Api\V1\GateController::class, 'getTypes']);
         Route::get('/{id}', [App\Http\Controllers\Api\V1\GateController::class, 'show']);
+        Route::get('/{id}/specs', [App\Http\Controllers\Api\V1\GateController::class, 'getSpecs']);
     });
 
     Route::prefix('automatic-for-gates')->group(function () {

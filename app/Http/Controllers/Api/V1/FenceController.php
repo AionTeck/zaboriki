@@ -78,6 +78,25 @@ class FenceController extends BaseController
         return $queryGetOne->handle($id);
     }
 
+    #[OAT\Get(
+        path: '/fences/{id}/specs',
+        summary: 'Get fence with specs by ID',
+        tags: ['Fences'],
+        parameters: [
+            new OAT\PathParameter(
+                name: 'id',
+                description: 'Fence ID',
+                required: true,
+                schema: new OAT\Schema(type: 'integer')
+            ),
+        ],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'OK'
+            ),
+        ]
+    )]
     public function getSpecs(int $id, FenceQueryOneWithSpecs $specs)
     {
         return $specs->handle($id);
