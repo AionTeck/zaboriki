@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Contexts\Accessories;
+namespace App\Domain\Contexts\Accessory;
 
 use App\Enum\AccessoryableType;
 use Spatie\LaravelData\Attributes\Validation\Enum;

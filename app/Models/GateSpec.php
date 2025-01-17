@@ -11,7 +11,8 @@ class GateSpec extends Model
     use HasFactory;
 
     protected $fillable = [
-        'value',
+        'height',
+        'width',
         'price',
         'gate_id',
     ];

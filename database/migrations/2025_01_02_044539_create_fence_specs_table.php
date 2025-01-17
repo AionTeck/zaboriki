@@ -16,6 +16,14 @@ return new class extends Migration {
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
+            $table->unsignedInteger('height')
+                ->nullable()
+                ->index();
+
+            $table->unsignedInteger('width')
+                ->nullable()
+                ->index();
+
             $table->string('value')
                 ->nullable()
                 ->index();

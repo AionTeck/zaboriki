@@ -2,7 +2,7 @@
 
 namespace App\UseCases\Queries;
 
-use App\Domain\Contexts\Accessories\AccessoriesDomainQueryList;
+use App\Domain\Contexts\Accessory\AccessoriesDomainQueryList;
 use App\Models\Accessory;
 use Illuminate\Database\Eloquent\Builder;
 use Thumbrise\Toolkit\Opresult\OperationResult;

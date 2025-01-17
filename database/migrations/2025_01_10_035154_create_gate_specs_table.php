@@ -9,7 +9,12 @@ return new class extends Migration {
     {
         Schema::create('gate_specs', function (Blueprint $table) {
             $table->id();
-            $table->string('value');
+            $table->unsignedInteger('height')
+                ->nullable()
+                ->index();
+            $table->unsignedInteger('width')
+                ->nullable()
+                ->index();
             $table->string('price');
             $table->foreignId('gate_id')
                 ->constrained('gates')

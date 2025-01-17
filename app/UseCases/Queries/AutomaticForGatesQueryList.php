@@ -2,7 +2,7 @@
 
 namespace App\UseCases\Queries;
 
-use App\Domain\Contexts\AutomaticForGates\AutomaticForGatesDomainQueryList;
+use App\Domain\Contexts\AutomaticForGate\AutomaticForGatesDomainQueryList;
 use App\Models\AutomaticForGate;
 use Illuminate\Database\Eloquent\Builder;
 use Thumbrise\Toolkit\Opresult\OperationResult;

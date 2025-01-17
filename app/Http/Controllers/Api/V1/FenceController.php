@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Domain\Contexts\Fence\FenceDomainQueryList;
+use App\Domain\Contexts\Fence\FenceDomainQueryUniqueList;
 use App\UseCases\Queries\FenceQueryOneWithSpecs;
+use App\UseCases\Queries\FenceSpecQueryUniqueList;
 use App\UseCases\Queries\FencesQueryList;
 use App\UseCases\Queries\FencesQueryOne;
 use App\UseCases\Queries\FencesTypesQueryList;
@@ -38,6 +40,12 @@ class FenceController extends BaseController
                 description: 'Fence type ID',
                 required: false,
                 schema: new OAT\Schema(type: 'integer')
+            ),
+            new OAT\QueryParameter(
+                name: 'height',
+                description: 'Fence height',
+                required: false,
+                schema: new OAT\Schema(type: 'float')
             ),
         ],
         responses: [
@@ -100,5 +108,31 @@ class FenceController extends BaseController
     public function getSpecs(int $id, FenceQueryOneWithSpecs $specs)
     {
         return $specs->handle($id);
+    }
+
+    #[OAT\Get(
+        path: '/fences/popular-specs',
+        summary: 'Get fences popular specs',
+        tags: ['Fences'],
+        parameters: [
+            new OAT\QueryParameter(
+                name: 'typeId',
+                description: 'Fence type ID',
+                required: false,
+                schema: new OAT\Schema(type: 'integer')
+            ),
+        ],
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'OK'
+            ),
+        ]
+    )]
+    public function getPopularSpecs(Request $request, FenceSpecQueryUniqueList $queryUniqueList)
+    {
+        $data = FenceDomainQueryUniqueList::from($request);
+
+        return $queryUniqueList->handle($data);
     }
 }

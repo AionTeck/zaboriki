@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Domain\Contexts\AutomaticForGates\AutomaticForGatesDomainQueryList;
+use App\Domain\Contexts\AutomaticForGate\AutomaticForGatesDomainQueryList;
 use App\UseCases\Queries\AutomaticForGatesOne;
 use App\UseCases\Queries\AutomaticForGatesQueryList;
 use Illuminate\Http\Request;

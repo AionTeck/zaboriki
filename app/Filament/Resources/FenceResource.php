@@ -67,6 +67,16 @@ class FenceResource extends Resource
                     ->columnSpanFull()
                     ->relationship('specs')
                     ->schema([
+                        TextInput::make('height')
+                            ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
+                            ->required(),
+                        TextInput::make('width')
+                            ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
+                            ->required(),
                         TextInput::make('value')
                             ->translateLabel()
                             ->required(),

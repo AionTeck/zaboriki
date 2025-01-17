@@ -53,8 +53,15 @@ class GateResource extends Resource
                     ->relationship('specs')
                     ->minItems(1)
                     ->schema([
-                        TextInput::make('value')
+                        TextInput::make('height')
                             ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
+                            ->required(),
+                        TextInput::make('width')
+                            ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
                             ->required(),
                         TextInput::make('price')
                             ->translateLabel()

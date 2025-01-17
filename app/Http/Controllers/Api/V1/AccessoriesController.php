@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Domain\Contexts\Accessories\AccessoriesDomainQueryList;
+use App\Domain\Contexts\Accessory\AccessoriesDomainQueryList;
 use App\Enum\AccessoryableType;
 use App\Http\Controllers\Controller;
 use App\UseCases\Queries\AccessoriesQueryList;
