@@ -44,8 +44,9 @@ class GetOneWithSpecsTest extends TestCase
                 'specs' => [
                     '*' => [
                         'spec_id',
-                        'value',
-                        'price'
+                        'height',
+                        'width',
+                        'price',
                     ]
                 ]
             ]

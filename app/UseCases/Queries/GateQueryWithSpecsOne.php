@@ -21,7 +21,8 @@ class GateQueryWithSpecsOne
         $specs = GateSpec::query()
             ->select([
                 'id as spec_id',
-                'value',
+                'height',
+                'width',
                 'price'
             ])
             ->where('gate_id', '=', $gate->id)

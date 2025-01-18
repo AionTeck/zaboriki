@@ -33,7 +33,6 @@ class GetOneTest extends TestCase
                 AccessorySpec::factory(2),
                 'specs'
             )
-
             ->create();
 
         Accessoryable::factory()
@@ -51,6 +50,12 @@ class GetOneTest extends TestCase
             'data' => [
                 'id',
                 'name',
+                'specs' => [
+                    '*' => [
+                        'spec_id',
+                        'dimension',
+                    ]
+                ]
             ],
         ]);
     }
