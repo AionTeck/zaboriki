@@ -14,7 +14,9 @@ class FenceSpecQueryUniqueList
     {
         $fenceSpecs = FenceSpec::query()
             ->select([
-                'height'
+                'fence_specs.id as spec_id',
+                'fence_specs.height',
+                'fence_specs.value'
             ])
             ->whereHas('fence', function (Builder $query) use ($data) {
                 $query->where('type_id', $data->typeId);

@@ -42,4 +42,15 @@ Route::prefix('v1')->group(function () {
     Route::prefix('clients')->group(function () {
        Route::post('/', [App\Http\Controllers\Api\V1\ClientController::class, 'create']);
     });
+
+    Route::prefix('calculations')->group(function () {
+        Route::post('/', [App\Http\Controllers\Api\V1\Calculations::class, 'getDataForPrepareOrder']);
+        Route::get('/{report_id}/download-report', [App\Http\Controllers\Api\V1\Calculations::class, 'downloadExportFile']);
+    });
+
+    Route::prefix('reports')->group(function () {
+        Route::get('/{report_id}/status',
+            [App\Http\Controllers\Api\V1\ReportsController::class, 'checkExportOrderStatus']
+        );
+    });
 });

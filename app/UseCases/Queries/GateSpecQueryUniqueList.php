@@ -14,6 +14,7 @@ class GateSpecQueryUniqueList
     {
         $gateSpecs = GateSpec::query()
             ->select([
+                'id as spec_id',
                 'height',
                 'width',
             ])

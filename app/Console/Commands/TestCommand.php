@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Enum\AccessoryableType;
+use App\Enum\ExportOrderStatus;
 use App\Models\Accessory;
 use App\Models\GateSpec;
 use Illuminate\Console\Command;
@@ -17,14 +18,6 @@ class TestCommand extends Command
 
     public function handle(): void
     {
-        $specs = GateSpec::query()
-            ->select([
-                'height',
-                'width',
-            ])
-            ->distinct()
-            ->get();
 
-        var_dump($specs->toArray());
     }
 }
