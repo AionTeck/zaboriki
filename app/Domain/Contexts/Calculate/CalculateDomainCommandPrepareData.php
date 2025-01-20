@@ -10,7 +10,8 @@ class CalculateDomainCommandPrepareData extends Data
         public ?array $fence,
         public array $gates,
         public int $mountingId,
-        public string $report_id
+        public string $report_id,
+        public int $user_id
     )
     {
     }

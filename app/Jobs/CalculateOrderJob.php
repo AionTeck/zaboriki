@@ -4,13 +4,16 @@ namespace App\Jobs;
 
 use App\Domain\Contexts\Calculate\CalculateDomainCommandPrepareData;
 use App\Enum\ExportOrderStatus;
+use App\Enum\ExportOrderType;
 use App\Enum\Measurement;
-use App\Export\OrderDetailsExport;
 use App\Models\Accessory;
 use App\Models\AutomaticForGate;
+use App\Models\Client;
 use App\Models\Fence;
 use App\Models\Gate;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Order;
+use App\Services\CacheManager\CacheManager;
+use App\Services\OrderExporter\ExporterBuilder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Query\JoinClause;
@@ -18,7 +21,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Facades\Excel;
 
 class CalculateOrderJob implements ShouldQueue
 {
@@ -40,13 +42,29 @@ class CalculateOrderJob implements ShouldQueue
 
         $this->transformCollection($goodsCollection);
 
-        $this->exportToPdf($goodsCollection);
-        $this->exportToExcel($goodsCollection);
+        $order = $this->createOrder();
 
-        $cache = \Cache::get($this->prepareData->report_id);
-        $cache['status'] = ExportOrderStatus::Success->value;
+        $orderExporter = new ExporterBuilder();
 
-        \Cache::put($this->prepareData->report_id, $cache);
+        $orderExporter
+            ->build(ExportOrderType::PDF)
+            ->do(
+                $goodsCollection,
+                $order,
+                $this->prepareData->report_id
+            );
+
+        $orderExporter
+            ->build(ExportOrderType::EXCEL)
+            ->do(
+                $goodsCollection,
+                $order,
+                $this->prepareData->report_id
+            );
+
+        CacheManager::editCache($this->prepareData->report_id, [
+            'status' => ExportOrderStatus::Success->value
+        ]);
     }
 
     private function getExportCollections(): Collection
@@ -66,6 +84,15 @@ class CalculateOrderJob implements ShouldQueue
             $item->blankPosition = $goodsCollection->search($item) + 1;
             $item->blankDate = date('d.m.y');
         });
+    }
+
+    private function createOrder(): Order
+    {
+        $client = Client::query()
+            ->where('telegram_id', '=', $this->prepareData->user_id)
+            ->firstOrFail();
+
+        return $client->orders()->create();
     }
 
     private function calculateFence(
@@ -174,84 +201,6 @@ class CalculateOrderJob implements ShouldQueue
             $accessoryModel->totalPrice = $accessoryModel->quantity * $accessoryModel->price;
 
             $goodCollection->push($accessoryModel);
-        }
-    }
-
-    private function exportToPdf(Collection $goodsCollection): void
-    {
-        $formatter = new \NumberFormatter('ru_RU', \NumberFormatter::SPELLOUT);
-
-        try {
-            $data = $goodsCollection->toArray();
-
-            $orderTotalSum =  $goodsCollection->sum('totalPrice');
-
-            $orderTotalSumAsString = str(
-                $formatter->format(
-                    $orderTotalSum
-                )
-            )
-                ->ucfirst()
-                ->toString();
-
-            $totalGoodsCount = $goodsCollection->sum('quantity');
-
-            //TODO Придумать заказ
-            $orderNumber = 1;
-
-            $orderDetails = compact(
-                'orderTotalSum',
-                'orderTotalSumAsString',
-                'totalGoodsCount',
-                'orderNumber'
-            );
-
-            $pdf = Pdf::loadView('pdf.order_details', compact('data', 'orderDetails'));
-
-            $filePath = \Storage::path('orders/' . $this->prepareData->report_id . '.pdf');
-
-            if (!file_exists(dirname($filePath))) {
-                mkdir(dirname($filePath), 0755, true);
-            }
-
-            $pdf->save($filePath);
-
-            $cache = \Cache::get($this->prepareData->report_id);
-            $cache['pdf_status'] = ExportOrderStatus::PdfSuccess->value;
-            $cache['pdf_path'] = $filePath;
-
-            \Cache::put($this->prepareData->report_id, $cache);
-        } catch (\Throwable $e) {
-            $cache = \Cache::get($this->prepareData->report_id);
-            $cache['pdf_status'] = ExportOrderStatus::PdfFailed->value;
-            $cache['pdf_message'] = $e->getMessage();
-
-            \Cache::put($this->prepareData->report_id, $cache);
-        }
-    }
-
-    private function exportToExcel(Collection $goodsCollection): void
-    {
-        try {
-            $filePath = 'orders/' . $this->prepareData->report_id . '.xlsx';
-
-            if (!file_exists(dirname($filePath))) {
-                mkdir(dirname($filePath), 0755, true);
-            }
-
-            Excel::store(new OrderDetailsExport($goodsCollection), $filePath, 'public');
-
-            $cache = \Cache::get($this->prepareData->report_id);
-            $cache['excel_status'] = ExportOrderStatus::ExcelSuccess->value;
-            $cache['excel_path'] = $filePath;
-
-            \Cache::put($this->prepareData->report_id, $cache);
-        } catch (\Throwable $e) {
-            $cache = \Cache::get($this->prepareData->report_id);
-            $cache['excel_status'] = ExportOrderStatus::ExcelFailed->value;
-            $cache['excel_message'] = $e->getMessage();
-
-            \Cache::put($this->prepareData->report_id, $cache);
         }
     }
 }

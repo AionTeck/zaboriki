@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ClientResource\Pages;
+use App\Filament\Resources\ClientResource\RelationManagers\OrdersRelationManager;
 use App\Models\Client;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
@@ -33,18 +34,10 @@ class ClientResource extends Resource
 
                 TextInput::make('phone_number')
                     ->translateLabel()
-                    ->req,
+                    ->required(),
 
                 TextInput::make('email')
                     ->translateLabel(),
-
-                Placeholder::make('created_at')
-                    ->label('Created Date')
-                    ->content(fn(?Client $record): string => $record?->created_at?->diffForHumans() ?? '-'),
-
-                Placeholder::make('updated_at')
-                    ->label('Last Modified Date')
-                    ->content(fn(?Client $record): string => $record?->updated_at?->diffForHumans() ?? '-'),
             ]);
     }
 
@@ -85,8 +78,10 @@ class ClientResource extends Resource
         ];
     }
 
-    public static function getGloballySearchableAttributes(): array
+    public static function getRelations(): array
     {
-        return ['name', 'email'];
+        return [
+            OrdersRelationManager::class,
+        ];
     }
 }

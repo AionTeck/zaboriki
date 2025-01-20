@@ -18,6 +18,16 @@ class TestCommand extends Command
 
     public function handle(): void
     {
+        $result = $this->testM(1 | 2);
 
+        var_dump($result);
+    }
+
+    private function testM(int $number): int
+    {
+        return match ($number) {
+            1 => 100,
+            2 => 200,
+        };
     }
 }

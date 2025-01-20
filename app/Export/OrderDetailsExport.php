@@ -4,11 +4,19 @@ namespace App\Export;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class OrderDetailsExport implements FromCollection, WithStrictNullComparison, WithHeadings, WithMapping
+class OrderDetailsExport implements FromCollection,
+    WithStrictNullComparison,
+    WithHeadings,
+    WithMapping,
+    ShouldAutoSize,
+    WithStyles
 {
     public function __construct(
         protected Collection $collection
@@ -44,6 +52,13 @@ class OrderDetailsExport implements FromCollection, WithStrictNullComparison, Wi
             $row->measurement,
             $row->price,
             $row->totalPrice,
+        ];
+    }
+
+    public function styles(Worksheet $sheet): array
+    {
+        return [
+            1 => ['font' => ['bold' => true]],
         ];
     }
 }
