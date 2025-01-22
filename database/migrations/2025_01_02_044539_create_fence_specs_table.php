@@ -16,12 +16,17 @@ return new class extends Migration {
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string('spec_type')
+            $table->unsignedInteger('height')
+                ->nullable()
+                ->index();
+
+            $table->unsignedInteger('width')
                 ->nullable()
                 ->index();
 
             $table->string('value')
-                ->nullable();
+                ->nullable()
+                ->index();
 
             $table->decimal('price')
                 ->nullable();

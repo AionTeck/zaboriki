@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enum\Measurement;
 use App\Enum\SpecType;
 use App\Filament\Resources\FenceResource\Pages;
 use App\Models\Fence;
@@ -21,6 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 
 class FenceResource extends Resource
 {
@@ -44,12 +46,10 @@ class FenceResource extends Resource
                     ->required()
                     ->translateLabel(),
 
-                Select::make('measurement_id')
+                Select::make('measurement_type')
                     ->required()
                     ->translateLabel()
-                    ->relationship('measurement', 'name')
-                    ->preload()
-                    ->searchable(),
+                    ->options(Measurement::toTranslatedArray()),
 
                 Select::make('type')
                     ->translateLabel()
@@ -61,48 +61,31 @@ class FenceResource extends Resource
                             ->required(),
                     ]),
 
-                Repeater::make('colors')
-                    ->relationship('colors')
-                    ->translateLabel()
-                    ->columnSpanFull()
-                    ->minItems(1)
-                    ->schema([
-                        Hidden::make('spec_type')
-                            ->default(SpecType::COLOR->value),
-
-                        ColorPicker::make('value')
-                            ->label('Цвет')
-                            ->required(),
-                    ])
-                    ->addActionLabel('Добавить цвет'),
-
                 Repeater::make('specs')
-                    ->relationship('specs')
+                    ->required()
                     ->translateLabel()
                     ->columnSpanFull()
-                    ->minItems(1)
+                    ->relationship('specs')
                     ->schema([
-                        Select::make('spec_type')
-                            ->options(function () {
-                                $types = SpecType::toTranslatedArray();
-
-                                unset($types['color']);
-
-                                return $types;
-                            })
+                        TextInput::make('height')
                             ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
                             ->required(),
-
+                        TextInput::make('width')
+                            ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
+                            ->required(),
                         TextInput::make('value')
                             ->translateLabel()
                             ->required(),
-
                         TextInput::make('price')
                             ->translateLabel()
                             ->required()
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(0)
                     ])
-                    ->addActionLabel('Добавить комбинацию'),
             ]);
     }
 
@@ -115,14 +98,12 @@ class FenceResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('measurement.name')
+                TextColumn::make('measurement_type')
                     ->translateLabel()
-                    ->searchable()
-                    ->sortable(),
+                    ->state(fn(Fence $fence) => Lang::get($fence->measurement_type->value)),
 
                 TextColumn::make('type.name')
                     ->translateLabel()
-                    ->sortable(),
             ])
             ->filters([
                 //

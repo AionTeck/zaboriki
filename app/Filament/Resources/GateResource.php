@@ -53,14 +53,16 @@ class GateResource extends Resource
                     ->relationship('specs')
                     ->minItems(1)
                     ->schema([
-                        TextInput::make('width')
-                            ->translateLabel()
-                            ->required()
-                            ->numeric(),
                         TextInput::make('height')
                             ->translateLabel()
-                            ->required()
-                            ->numeric(),
+                            ->numeric()
+                            ->minValue(0)
+                            ->required(),
+                        TextInput::make('width')
+                            ->translateLabel()
+                            ->numeric()
+                            ->minValue(0)
+                            ->required(),
                         TextInput::make('price')
                             ->translateLabel()
                             ->required()
@@ -74,8 +76,11 @@ class GateResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('type.name')
+                    ->translateLabel()
             ])
             ->filters([
                 //

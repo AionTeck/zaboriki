@@ -18,7 +18,12 @@ class FencesQueryList
             ])
             ->when($data->typeId, function (Builder $query) use ($data) {
                 $query->whereHas('type', function (Builder $query) use ($data) {
-                    $query->where('fence_types.id', $data->typeId);
+                    $query->where('fence_types.id', '=', $data->typeId);
+                });
+            })
+            ->when($data->height, function (Builder $query) use ($data) {
+                $query->whereHas('specs', function (Builder $query) use ($data) {
+                    $query->where('fence_specs.height', '=', $data->height*1000);
                 });
             })
             ->get();

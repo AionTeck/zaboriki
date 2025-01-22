@@ -14,8 +14,6 @@ class GateSpecFactory extends Factory
     public function definition(): array
     {
         return [
-            'width' => $this->faker->randomNumber(),
-            'height' => $this->faker->randomNumber(),
             'price' => $this->faker->randomNumber(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

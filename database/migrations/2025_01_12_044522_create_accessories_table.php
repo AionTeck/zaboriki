@@ -10,10 +10,8 @@ return new class extends Migration {
         Schema::create('accessories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('measurement_id')
-                ->constrained('measurements')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            $table->string('measurement_type')
+                ->nullable();
             $table->timestamps();
         });
     }
