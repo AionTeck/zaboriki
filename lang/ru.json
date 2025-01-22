@@ -244,5 +244,8 @@
     "rl": "Рулон",
     "ls": "Лист",
     "st": "Комплект",
-    "Measurement type": "Тип измерения"
+    "Measurement type": "Тип измерения",
+    "Executor document text": "Текст документа",
+    "Executor document phone": "Телефон документа",
+    "Request email": "Email запросов"
 }

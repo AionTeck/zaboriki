@@ -4,6 +4,7 @@ namespace App\Services\OrderExporter;
 
 use App\Enum\ExportOrderStatus;
 use App\Models\Order;
+use App\Models\Settings;
 use App\Services\CacheManager\CacheManager;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Collection;
@@ -37,11 +38,18 @@ class OrderExportToPdf implements OrderExportInterface
 
             $orderNumber = $order->id;
 
+            $settings = Settings::first();
+
+            $documentText = $settings->executor_document_text;
+            $documentPhone = $settings->executor_document_phone;
+
             $orderDetails = compact(
                 'orderTotalSum',
                 'orderTotalSumAsString',
                 'totalGoodsCount',
-                'orderNumber'
+                'orderNumber',
+                'documentText',
+                'documentPhone'
             );
 
             $pdf = Pdf::loadView('pdf.order_details', compact('data', 'orderDetails'));

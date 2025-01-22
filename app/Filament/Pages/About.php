@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Actions\Action;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -11,14 +12,15 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Log;
 
-class Settings extends Page
+class About extends Page
 {
-    public array $data = [];
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.pages.settings';
+    protected static string $view = 'filament.pages.about';
 
-    protected static ?string $title = 'Настройки';
+    public array $data = [];
+
+    protected static ?string $title = 'О нас';
 
     public function mount(): void
     {
@@ -32,24 +34,17 @@ class Settings extends Page
                 Fieldset::make()
                     ->columnSpanFull()
                     ->schema([
-                        MarkdownEditor::make('executor_document_text')
+                        MarkdownEditor::make('about_text')
                             ->translateLabel()
                             ->required()
                             ->columnSpanFull(),
 
-                        TextInput::make('executor_document_phone')
+                        FileUpload::make('about_image')
                             ->translateLabel()
                             ->required()
-                            ->mask("+7(999) 999-99-99"),
+                            ->directory('about')
+                            ->columnSpanFull(),
                     ]),
-                Fieldset::make()
-                    ->columnSpanFull()
-                    ->schema([
-                        TextInput::make('request_email')
-                            ->translateLabel()
-                            ->required()
-                            ->email()
-                    ])
             ])
             ->model(\App\Models\Settings::query()->firstOrNew())
             ->statePath('data')

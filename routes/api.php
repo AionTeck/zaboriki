@@ -53,4 +53,8 @@ Route::prefix('v1')->group(function () {
             [App\Http\Controllers\Api\V1\ReportsController::class, 'checkExportOrderStatus']
         );
     });
+
+    Route::get('about', [\App\Http\Controllers\Api\V1\AboutController::class, 'index']);
+
+    Route::post('contact', [\App\Http\Controllers\Api\V1\ContactController::class, 'index']);
 });

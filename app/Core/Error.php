@@ -7,4 +7,5 @@ enum Error
     case NOT_FOUND;
     case FORBIDDEN;
     case INVALID_INPUT;
+    case EMAIL_ERROR;
 }
